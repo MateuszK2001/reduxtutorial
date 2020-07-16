@@ -1,10 +1,11 @@
-enum Actions{
-    INCREMENT, 
+enum Actions {
+    INCREMENT,
     DECREMENT,
     ADD,
     SUBTRACT,
     PUSH,
-    DELETE,
+    REMOVE,
 }
+
 
 export default Actions;

@@ -1,4 +1,5 @@
-import Actions from "../actions";
+import Actions from '../actions/actionTypes';
+import updateObject from '../utility';
 
 const initialState = {
     data : [] as number[]
@@ -17,10 +18,13 @@ const result = (state = initialState, action: Action) => {
 
     switch (action.type) {
         case Actions.PUSH:
-            res.data.push(action.val!);
-            break;
-        case Actions.DELETE:
-            res.data.splice(action.idx!, 1);
+            return updateObject(state,{
+                data: state.data.concat(action.val!)
+            });
+        case Actions.REMOVE:
+            return updateObject(state,{
+                data: state.data.filter((_,i)=>i!==action.idx!)
+            });
     }
     return res;
 };

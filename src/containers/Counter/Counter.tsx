@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
 import {connect} from 'react-redux';
-import Actions from '../../store/actions';
+import Actions from '../../store/actions/actionTypes';
+import { remove, push } from '../../store/actions/result';
+import { subtrack, add, decrement, increment } from '../../store/actions/counter';
 
 interface Props{
     ctr:number;
@@ -47,12 +49,12 @@ const mapStateToProps = (state:any) =>{
 };
 const mapDispatchToProps = (dispatch:any)=>{
     return{
-        onIncrementCounter: ()=>dispatch({type: Actions.INCREMENT}),
-        onDecrementCounter: ()=>dispatch({type: Actions.DECREMENT}),
-        onAddCounter: (cnt:number)=>dispatch({type: Actions.ADD, val: cnt}),
-        onSubtractCounter: (cnt:number)=>dispatch({type: Actions.SUBTRACT, val: cnt}),
-        onStoreResult: (val:number)=> dispatch({type: Actions.PUSH, val:val}),
-        onDeleteResult: (id:number)=> dispatch({type: Actions.DELETE, idx:id}),
+        onIncrementCounter: ()=> dispatch(increment()),
+        onDecrementCounter: ()=>dispatch(decrement()),
+        onAddCounter: (cnt:number)=>dispatch(add(cnt)),
+        onSubtractCounter: (cnt:number)=>dispatch(subtrack(cnt)),
+        onStoreResult: (val:number)=> dispatch(push(val)),
+        onDeleteResult: (id:number)=> dispatch(remove(id)),
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);

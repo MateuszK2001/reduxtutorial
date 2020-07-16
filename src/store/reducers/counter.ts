@@ -1,5 +1,5 @@
-import Actions from "../actions";
-
+import Actions from "../actions/actionTypes";
+import updateObject from "../utility";
 const initialState = {
     counter: 0,
 }
@@ -10,25 +10,21 @@ interface Action {
     idx?:number;
 }
 const counter = (state = initialState, action: Action) => {
-    const res =  {
-        ...state,
-    };
-
     switch (action.type) {
         case Actions.INCREMENT:
-            res.counter++;
-            break;
+            return updateObject(state, 
+                {counter: state.counter+1})
         case Actions.DECREMENT:
-            res.counter--;
-            break;
+            return updateObject(state, 
+                {counter: state.counter-1})
         case Actions.ADD:
-            res.counter += action.val!;
-            break;
+            return updateObject(state, 
+                {counter: state.counter+action.val!})
         case Actions.SUBTRACT:
-            res.counter -= action.val!;
-            break;
+            return updateObject(state, 
+                {counter: state.counter-action.val!})
     }
-    return res;
+    return state;
 };
 
 export default counter;
